@@ -1,0 +1,36 @@
+name: GitHub Hosted Runners
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ubuntu:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Runner Info
+        run: |
+          echo "OS: Ubuntu"
+          hostname
+          whoami
+
+  windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Print Runner Info
+        shell: powershell
+        run: |
+          Write-Host "OS: Windows"
+          hostname
+          whoami
+
+  mac:
+    runs-on: macos-latest
+
+    steps:
+      - name: Print Runner Info
+        run: |
+          echo "OS: macOS"
+          hostname
+          whoami
