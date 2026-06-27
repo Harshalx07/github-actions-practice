@@ -1,0 +1,20 @@
+name: Self Hosted Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  self-hosted-job:
+    runs-on: self-hosted
+
+    steps:
+      - name: Print Hostname
+        run: hostname
+
+      - name: Print Working Directory
+        run: pwd
+
+      - name: Create File
+        run: |
+          touch hello.txt
+          ls -la
