@@ -1,20 +1,30 @@
-name: Upload Artifact
+name: Upload and Download Artifact
 
 on:
   workflow_dispatch:
 
 jobs:
-  artifact:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Create report
-        run: |
-          mkdir reports
-          echo "CI Passed Successfully" > reports/report.txt
+      - run: |
+          echo "Build Successful" > output.txt
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
-          name: test-report
-          path: reports/report.txt
+          name: build-output
+          path: output.txt
+
+  consume:
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-output
+
+      - run: |
+          cat output.txt
